@@ -79,7 +79,9 @@
 //  [mySlider addTarget:self action:@selector(sliderChanged:)
 //  forControlEvents:UIControlEventValueChanged];
     
-    
+    //alert
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"This is a test!" message:@"Are you sure to close the window?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+    [alert show];
 
 }
 
