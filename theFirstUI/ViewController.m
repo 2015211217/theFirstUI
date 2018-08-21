@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 
+
 @interface ViewController ()
 //  UItextfield
 
@@ -19,34 +20,40 @@
 - (void)addNewUITextField {
     
     // 修改背景 注意存放的文件夹
+    //UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"This is a test!" message:@"Are you sure to close the window?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
     
-    // 占内存 self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"dog.jpg"]];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"dog"]];
     //推荐方式 failed
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"dog"ofType:@"jpeg"];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
-    self.view.layer.contents = (id)image.CGImage;
+//    NSString *path = [[NSBundle mainBundle]pathForResource:@"dog"ofType:@"jpeg"];
+//    UIImage *image = [UIImage imageWithContentsOfFile:path];
+//    self.view.layer.contents = (id)image.CGImage;
+//
     
-    //button
+//    JKOneViewController *one = [[JKOneViewController alloc] init];
+//    JKTwoViewController *two = [[JKTwoViewController alloc] init];
+//    JKOneViewController *three = [[JKOneViewController alloc] init];
+//    JKTwoViewController *four = [[JKTwoViewController alloc] init];
+    
+    
     UIButton *bu_1 = [[UIButton alloc] initWithFrame:CGRectMake(60, 80, 50, 50)];
     UIButton *bu_2 = [[UIButton alloc] initWithFrame:CGRectMake(180, 80, 50, 50)];
     UIButton *bu_3 = [[UIButton alloc] initWithFrame:CGRectMake(300, 80, 50, 50)];
-    [self.view addSubview:bu_1];
-    [self.view addSubview:bu_2];
-    [self.view addSubview:bu_3];
     bu_1.backgroundColor = [UIColor brownColor];
     bu_2.backgroundColor = [UIColor redColor];
     bu_3.backgroundColor = [UIColor purpleColor];
     [bu_1 setTitle:@"One" forState:UIControlStateNormal];
     [bu_2 setTitle:@"Two" forState:UIControlStateNormal];
     [bu_3 setTitle:@"Three" forState:UIControlStateNormal];
+    [bu_1 addTarget:self action:@selector(btn1Click) forControlEvents:UIControlEventTouchUpInside];
+    [bu_2 addTarget:self action:@selector(btn2Click) forControlEvents:UIControlEventTouchUpInside];
+    [bu_3 addTarget:self action:@selector(btn3Click) forControlEvents:UIControlEventTouchUpInside];
+    //[btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     
     //label
     UILabel *la_1 = [[UILabel alloc] initWithFrame:CGRectMake(60, 130, 50, 50)];
     UILabel *la_2 = [[UILabel alloc] initWithFrame:CGRectMake(180, 130, 50, 50)];
     UILabel *la_3 = [[UILabel alloc] initWithFrame:CGRectMake(300, 130, 50, 50)];
-    [self.view addSubview:la_1];
-    [self.view addSubview:la_2];
-    [self.view addSubview:la_3];
     la_1.textColor = [UIColor blackColor];
     la_2.textColor = [UIColor blackColor];
     la_3.textColor = [UIColor blackColor];
@@ -66,7 +73,6 @@
     // 设置是否滑动时取值
     slide.continuous = YES;
     // failed
-    [self sliderAction:slide];
     
     
 
@@ -102,23 +108,68 @@
 //    UIBarStyleBlackTranslucent：黑色透明
 */
     
+    //imageView
+    UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dog.jpeg"]];
     
     
-    //scorll
-    myScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(60, 300, 300, 300)];
-    myScroll.accessibilityActivationPoint = CGPointMake(100, 100);
-    myScroll.backgroundColor = [UIColor darkGrayColor];
-    imageView = [[UIImageView alloc] init];
-    imageView.backgroundColor = [UIColor darkGrayColor];
-    [myScroll addSubview:imageView];
-    myScroll.minimumZoomScale = 0.0;
-    myScroll.maximumZoomScale = 10.0;
+    //scorll_small
+    upperScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(60, 300, 300, 400)];
+    [upperScroll addSubview:imgView];
     
-    myScroll.contentSize = CGSizeMake(imageView.frame.size.width, imageView.frame.size.height);
+    upperScroll.minimumZoomScale = 0.5;
+    upperScroll.maximumZoomScale = 3.0;
+    upperScroll.contentSize = CGSizeMake(imgView.frame.size.width, imgView.frame.size.height);
+    upperScroll.delegate = self;
+    upperScroll.backgroundColor = [UIColor grayColor];
+    
+    //tableView
+    myData = [[NSMutableArray alloc] initWithObjects:
+              @"Data 1 in array", @"Data 2 in array", @"Data 3 in array",
+              @"Data 1 in array", @"Data 2 in array", @"Data 3 in array",
+              @"Data 1 in array", @"Data 2 in array", @"Data 3 in array",
+              nil];
+    
+    //Text view
+    myTextView = [[UITextView alloc] initWithFrame:CGRectMake(60, 800, 300, 300)];
+    [myTextView setText:@"There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.vThere was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died.There was a man and he's desparately hungry, so he ate an apple then he died."];
+    myTextView.delegate = self;
+    
+    //UILabel * dogge = [[UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
+    
+    //scorll_big
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize size = rect.size;
+    CGFloat SCREEN_WIDTH = size.width;
+    CGFloat SCREEN_HEIGHT = size.height;
+    
+    myScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    //myScroll.contentMode = UIViewContentModeScaleToFill;
+    
+    myScroll.backgroundColor = [UIColor lightGrayColor];
+    myScroll.pagingEnabled = YES;
+    myScroll.minimumZoomScale = 0.5;
+    myScroll.maximumZoomScale = 3.0;
+    [myScroll addSubview:bu_1];
+    [myScroll addSubview:bu_2];
+    [myScroll addSubview:bu_3];
+    [myScroll addSubview:la_1];
+    [myScroll addSubview:la_2];
+    [myScroll addSubview:la_3];
+    [myScroll addSubview:slide];
+    [myScroll addSubview:upperScroll];
+    [myScroll addSubview:myTextView];
     myScroll.delegate = self;
     [self.view addSubview:myScroll];
     
     
+    
+    //pageControl failed
+//    UIPageControl * pageControl = [[UIPageControl alloc] init];
+//    pageControl.numberOfPages = 3;
+//    CGSize size = [pageControl sizeForNumberOfPages:3];
+//    pageControl.bounds = CGRectMake(0, 0, size.width, size.height);
+//    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+//    [self.view addSubview:pageControl];
     
     // 点击按钮分别会出现的效果
     /*
@@ -230,5 +281,23 @@
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
     NSLog(@"Did begin dragging");
+}
+
+- (void)btn1Click{
+    NSLog(@"btn1 has been touched.");
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"emmmmmmmmmm" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [alert show];
+    // 新建一个界面
+    UIViewController *vc = [[UIViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)btn2Click{
+    
+}
+
+- (void)btn3Click{
+    
 }
 @end
