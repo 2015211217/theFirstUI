@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController{
-    UITextField *myText;
-    UIPickerView *mypicker;
-    NSArray *pickerarray;
+@interface ViewController : UIViewController<UIScrollViewDelegate, UIPickerViewDelegate, UITextFieldDelegate>{
+    UIScrollView * myScroll;
+    UIImageView * imageView;
+    
+    UITextField * myText;
+    UIPickerView * myPickerView;
+    NSArray * pickerArray;
 }
 - (void)addNewUITextField;
+- (void)sliderAction:(UISlider * )sender;
 @end
 
