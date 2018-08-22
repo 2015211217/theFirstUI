@@ -42,6 +42,9 @@
     bu_1.backgroundColor = [UIColor brownColor];
     bu_2.backgroundColor = [UIColor redColor];
     bu_3.backgroundColor = [UIColor purpleColor];
+    bu_1.layer.cornerRadius = 20;
+    bu_2.layer.cornerRadius = 20;
+    bu_3.layer.cornerRadius = 20;
     [bu_1 setTitle:@"One" forState:UIControlStateNormal];
     [bu_2 setTitle:@"Two" forState:UIControlStateNormal];
     [bu_3 setTitle:@"Three" forState:UIControlStateNormal];
@@ -74,6 +77,16 @@
     slide.continuous = YES;
     // failed
     
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize size = rect.size;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+    UILabel *buttom = [[UILabel alloc] initWithFrame:CGRectMake(0, height-80, width, 80)];
+    buttom.backgroundColor = [UIColor grayColor];
+    //    la.font = [UIFont fontWithName:@"Helvetica-Bold" size:30.f];
+    buttom.font = [UIFont fontWithName:@"Helvetica-Bold" size:30.f];
+    buttom.textAlignment = NSTextAlignmentCenter;
+    [buttom setText:@"BIKINI BUTTOM"];
     
 
   /*
@@ -113,7 +126,7 @@
     
     
     //scorll_small
-    upperScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(60, 300, 300, 400)];
+    upperScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(60, 280, 300, 300)];
     [upperScroll addSubview:imgView];
     
     upperScroll.minimumZoomScale = 0.5;
@@ -137,12 +150,8 @@
     //UILabel * dogge = [[UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
     
     //scorll_big
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    CGSize size = rect.size;
-    CGFloat SCREEN_WIDTH = size.width;
-    CGFloat SCREEN_HEIGHT = size.height;
     
-    myScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    myScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     //myScroll.contentMode = UIViewContentModeScaleToFill;
     
     myScroll.backgroundColor = [UIColor lightGrayColor];
@@ -158,6 +167,7 @@
     [myScroll addSubview:slide];
     [myScroll addSubview:upperScroll];
     [myScroll addSubview:myTextView];
+    [myScroll addSubview:buttom];
     myScroll.delegate = self;
     [self.view addSubview:myScroll];
     
@@ -300,4 +310,5 @@
 - (void)btn3Click{
     
 }
+
 @end

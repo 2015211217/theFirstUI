@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-
+//  delegate设置属性的时候要用assign，不要用retain
+//  表示ViewController可以实现后面的delegate，这里没有发布委托的代码
+//  适用于两个对象，但是如果在B里面重新alloc一个对象A的话，新的对象A和原来的对象A不是同样的
 @interface ViewController : UIViewController<UIScrollViewDelegate, UIPickerViewDelegate, UITextFieldDelegate,
                             UITableViewDelegate, UITextViewDelegate, UITableViewDataSource>{
     UIScrollView * myScroll;
